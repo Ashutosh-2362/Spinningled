@@ -709,16 +709,31 @@
         =========================================== */
 
         let names = [
-            "Sherlock Holmes",
-            "Elizabeth Bennet",
-            "Jay Gatsby",
-            "Hermione Granger",
-            "Atticus Finch",
-            "Huckleberry Finn",
-            "Jane Eyre",
-            "Frodo Baggins",
-            "Harry Potter",
-            "Katniss Everdeen"
+            "Banjo",
+            "Trombone",
+            "Xylophone",
+            "Bagpipe",
+            "Djembe",
+            "Guitar",
+            "Piano",
+            "Violin",
+            "Drum",
+            "Tabla",
+            "Sitar",
+            "Flute",
+            "Saxophone",
+            "Trumpet",
+            "Cello",
+            "Harmonium",
+            "Keyboard",
+            "Bass",
+            "Ukulele",
+            "Viola",
+            "Harp",
+            "Clarinet",
+            "Oboe",
+            "Mandolin",
+            "Accordion"
         ];
 
         let usedNames = [];
@@ -1142,60 +1157,115 @@
            OUTER DOTS
         =========================================== */
 
-        function drawOuterDots() {
+ function drawOuterDots() {
+
+        const bulbCount =
+            Math.max(names.length * 3, 30);
+
+        const bulbRadius =
+            radius + 27;
+
+        for (let i = 0; i < bulbCount; i++) {
+
+            const angle =
+                (Math.PI * 2 / bulbCount) * i;
+
+            const x =
+                centerX +
+                Math.cos(angle) *
+                bulbRadius;
+
+            const y =
+                centerY +
+                Math.sin(angle) *
+                bulbRadius;
+
 
             /*
-              Number of decorative dots.
+              OUTER GLOW
             */
+            ctx.save();
 
-            const dotCount =
-                Math.max(names.length * 3, 30);
+            ctx.beginPath();
 
+            ctx.arc(
+                x,
+                y,
+                13,
+                0,
+                Math.PI * 2
+            );
 
-            const dotRadius =
-                radius + 27;
+            ctx.fillStyle =
+                "rgba(255, 214, 92, 0.22)";
 
+            ctx.shadowColor =
+                "rgba(255, 190, 40, 0.95)";
 
-            for (
-                let i = 0;
-                i < dotCount;
-                i++
-            ) {
+            ctx.shadowBlur = 20;
 
-                const angle =
-                    (Math.PI * 2 / dotCount) * i;
-
-
-                const x =
-                    centerX +
-                    Math.cos(angle) *
-                    dotRadius;
+            ctx.fill();
 
 
-                const y =
-                    centerY +
-                    Math.sin(angle) *
-                    dotRadius;
+            /*
+              BULB BODY
+            */
+            ctx.beginPath();
+
+            ctx.arc(
+                x,
+                y,
+                8,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fillStyle =
+                "#fff7cf";
+
+            ctx.shadowColor =
+                "#ffc83d";
+
+            ctx.shadowBlur = 13;
+
+            ctx.fill();
 
 
-                ctx.beginPath();
+            /*
+              GOLDEN BULB BORDER
+            */
+            ctx.strokeStyle =
+                "#ffd35a";
 
-                ctx.arc(
-                    x,
-                    y,
-                    8,
-                    0,
-                    Math.PI * 2
-                );
+            ctx.lineWidth = 2;
 
-                ctx.fillStyle =
-                    "#737373";
+            ctx.stroke();
 
-                ctx.fill();
 
-            }
+            /*
+              SMALL WHITE CENTER
+            */
+            ctx.beginPath();
 
+            ctx.arc(
+                x - 2,
+                y - 2,
+                3.5,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fillStyle =
+                "#ffffff";
+
+            ctx.shadowBlur = 0;
+
+            ctx.fill();
+
+
+            ctx.restore();
         }
+    }
 
 
         /* ==========================================
